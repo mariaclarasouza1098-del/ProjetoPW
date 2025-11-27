@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+     <style>
+        :root{
+            --bg:#84aff0; 
+            --primary:#4da3ff;
+            --primary-dark:#3474e6;
+            --card-bg:#ffffff;
+            --text:#03203a;
+            --muted:#6b7b8c;
+        }
+        *{box-sizing:border-box}
+        body{
+            margin:0;
+            font-family: Arial, Helvetica, sans-serif;
+            background:var(--bg);
+            color:var(--text);
+            min-height:100vh;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            padding:24px;
+        }
+
+        .logo-container{
+            width:100%;
+            display:flex;
+            justify-content:center;
+            margin:18px 0;
+        }
+        .logo{
+            max-width:220px;
+            height:auto;
+            display:block;
+        }
+
+        .container{
+            width:100%;
+            max-width:720px;
+            background:var(--card-bg);
+            border-radius:10px;
+            padding:28px;
+            box-shadow:0 8px 28px rgba(10,30,60,0.08);
+        }
+        h2{
+            margin:0 0 12px;
+            color:var(--primary-dark);
+            text-align:center;
+        }
+
+        form{
+            display:flex;
+            flex-direction:column;
+            gap:12px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="date"]{
+            width:100%;
+            padding:12px 14px;
+            border:1px solid rgba(7,40,80,0.08);
+            border-radius:6px;
+            font-size:15px;
+            color:var(--text);
+            background:#fbfeff;
+        }
+
+        button{
+            padding:12px;
+            background:var(--primary);
+            color:#fff;
+            border:none;
+            border-radius:8px;
+            font-size:16px;
+            cursor:pointer;
+        }
+        button:hover{ background:var(--primary-dark); }
+
+        .links-row{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:12px;
+            margin-top:6px;
+            flex-wrap:wrap;
+        }
+
+        .back-link{
+            color:var(--primary-dark);
+            text-decoration:none;
+            font-size:14px;
+        }
+        .back-link:hover{ text-decoration:underline; }
+
+        #password-error{
+            color:#c0392b;
+            font-size:14px;
+            margin:0;
+            display:none;
+        }
+
+        @media (max-width:480px){
+            .container{ padding:18px; }
+            .logo{ max-width:160px; }
+        }
+</style>
+</head>
+<body>
+      <div class="logo-container">
+        <img src="img/susdigital.png" alt="Logo SUS" class="logo">
+    </div>
+    <div class="container">
+        <h2>Cadastro</h2>
+        <form action="cadastrar_usuario.php" method="POST" onsubmit="return validatePassword()"> 
+            <input type="text" name="cpf" placeholder="CPF" required>
+            <input type="text" name="susnum" placeholder="Número do cartão SUS" required>
+            <input type="text" name="nome" placeholder="Nome" required>
+            <label for="Nascimento" style="font-size:14px; color:black;">Data de Nascimento</label>
+            <input type="date" name="Nascimento" id="Nascimento" aria-label="Data de Nascimento" title="Data de Nascimento" required>
+            <input type="email" name="email" placeholder="E-mail" required>
+            <input type="password" name="senha" id="senha" placeholder="Senha" required> 
+            <input type="password" name="confirmar_senha" id="confirmar_senha" placeholder="Confirmar Senha" required>
+          
+           
+            <p id="password-error">As senhas não coincidem.</p>
+
+            <button type="submit">Cadastrar</button> 
+            <a href="index.html" class="back-link">Voltar</a>
+
+        </form>
+    </div>
+    
+    <script>
+        function validatePassword() {
+            const password = document.getElementById('senha').value;
+            const confirmPassword = document.getElementById('confirmar_senha').value;
+            const errorElement = document.getElementById('password-error');
+
+            if (password !== confirmPassword) {
+                errorElement.style.display = 'block';
+                
+               
+                document.getElementById('senha').focus(); 
+                
+                return false; 
+            } else {
+                
+                errorElement.style.display = 'none';
+                return true;
+            }
+        }
+    </script>
+</body>
+</html>
